@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_white"
+        android:title="@string/menu_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="collapseActionView|ifRoom"/>
+
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/ic_funnel"
+        android:title="menu_filter"
+        android:visible="true"
+        app:showAsAction="collapseActionView|ifRoom">
+        <menu>
+            <item
+                android:id="@+id/action_allapps"
+                android:title="ALL APPS"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/action_loc"
+                android:title="LOCATION"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/action_cam"
+                android:title="CAMERA"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/action_mic"
+                android:title="MICROPHONE"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/action_conts"
+                android:title="CONTACTS"
+                app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
+</menu>

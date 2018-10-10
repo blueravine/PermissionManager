@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="#F8B864"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:weightSum="1"
+        android:layout_height="match_parent">
+
+
+
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.62"
+            android:visibility="gone"
+            android:id="@+id/relative_search"
+            >
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/event_search_edit"
+                app:srcCompat="@drawable/ic_cleartext"
+                android:id="@+id/clear_img"
+                android:layout_centerVertical="true"
+
+                tools:ignore="VectorDrawableCompat" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="tap here to search"
+                android:textColor="#2f2f2f"
+                android:textColorHint="#2f2f2f"
+                android:imeOptions="actionDone"
+                android:backgroundTint="#2f2f2f"
+                android:ems="10"
+                android:id="@+id/event_search_edit"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+            <TextView
+                android:padding="6dp"
+                android:visibility="gone"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="search here"
+                android:textColor="#2f2f2f"
+                android:background="@color/colorPrimaryDark"
+                android:clickable="false"
+                android:ems="10"
+                android:id="@+id/event_search_date"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:letterSpacing="0.1"
+            android:clickable="false"
+
+            android:id="@+id/title_toolbar"
+            android:layout_width="0dp"
+            android:layout_weight="0.55"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textAllCaps="true"
+            android:gravity="center"
+            android:visibility="visible"
+            android:textColor="#000"
+             />
+       <!-- android:text="@string/app_name"-->
+
+<!--android:src="@drawable/menu_toggle"-->
+
+
+        <ImageView
+            android:padding="8dp"
+            android:src="@drawable/ic_search_white"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:id="@+id/menu_one" />
+        <ImageView
+            android:padding="8dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_funnel"
+            android:layout_width="0dp"
+            android:visibility="visible"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:id="@+id/menu_two" />
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.Toolbar>
+
+
+
+
+

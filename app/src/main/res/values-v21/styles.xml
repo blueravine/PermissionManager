@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated" tools:ignore="NewApi">#2e8d3d</item>
+    </style>
+</resources>
