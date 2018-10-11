@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.Settings;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,7 +56,7 @@ public class PermissionAdapter extends ArrayAdapter<PackageVal> implements Filte
 
         locationListener = null;
 
-        getFilter();
+//        getFilter();
     }
     @Override
     public int getCount() {
@@ -90,7 +92,7 @@ public class PermissionAdapter extends ArrayAdapter<PackageVal> implements Filte
         simpleSwitch2 = (TextView) rowView.findViewById(R.id.SwitchMic);
         simpleSwitch3 = (TextView) rowView.findViewById(R.id.SwitchCall);
         cardview = (CardView) rowView.findViewById(R.id.card_view);
-
+        final RelativeLayout relativeLayout = (RelativeLayout) rowView.findViewById(R.id.rowlayout);
         TextView title = (TextView) rowView.findViewById(R.id.Title);
 //        TextView row = (TextView) rowView.findViewById(R.id.Row);
         title.setText(appinstall.get(position).name); //Nazwa aplikacji
@@ -102,12 +104,17 @@ public class PermissionAdapter extends ArrayAdapter<PackageVal> implements Filte
         {
             @Override
             public void onClick(View view) {
+                Snackbar snackbar = Snackbar
+                        .make(relativeLayout, "app postion " +appinstall.get(position).packageName.toString(), Snackbar.LENGTH_LONG);
+
+                snackbar.show();
                 Intent in = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.parse("package:" + PackageName.get(position).packageName.toString());
+                Uri uri = Uri.parse("package:" + appinstall.get(position).packageName.toString());
                 in.setData(uri);
                 in.addCategory(Intent.CATEGORY_DEFAULT);
 //                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(in);
+
 //                appinstall.get(1).packageName.contains(lastSearchRequest);
 //                Log.e("Permission ", String.valueOf(appinstall.get(1).packageName.contains(lastSearchRequest)));
             }
@@ -158,7 +165,7 @@ public class PermissionAdapter extends ArrayAdapter<PackageVal> implements Filte
                 switch(constraint.charAt(0)){
                     case 'Q':
 
-                // search content in friend list
+                // search content in PackageVal list
                         for (PackageVal appnames : PackageValList) {
                             if (appnames.getName().toLowerCase().contains(constraint.subSequence(3,constraint.length()).toString().toLowerCase())) {
                                 tempList.add(appnames);

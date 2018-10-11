@@ -189,20 +189,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //        });
 
-
-//        disable.setOnClickListener(new View.OnClickListener() { //button that disables the processes
-//            @Override
-//            public void onClick(View view)
-//            {
-//
-//                killProcesses(comparator()); //function that kills processes
-//                System.out.println(activityes.toArray());
-//                Intent intent = new Intent(getApplicationContext(), SingleItem.class);
-//                intent.putExtra("tokill", AppName); //we insert our list of killed applications for the next activity
-//                Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_LONG).show();
-//                startActivity(intent);
-//            }
-//        });
 //        mState = 0;
 //        invalidateOptionsMenu();
         handletoggleclicks();
@@ -734,7 +720,8 @@ A method that checks whether an application is a system application. We reject s
 //                return o1.packageName.compareTo(o2.packageName);
 //            }
 //        });
-
+                PackageValList.clear();
+                PackageName.clear();
         for (PackageInfo pInfo : appinstall)
         {
 
@@ -764,6 +751,7 @@ A method that checks whether an application is a system application. We reject s
                             }
                         }
 
+
                     }
                     PackageValList.add(packageVal);
                 }
@@ -780,54 +768,68 @@ A method that checks whether an application is a system application. We reject s
     }
 
 
-    protected void killProcesses(ArrayList<Integer> toKill)
-    {
+//    protected void killProcesses(ArrayList<Integer> toKill)
+//    {
+//
+//        int mypid = myPid();
+//        for (int iCnt = 0; iCnt < AppName.size(); iCnt++)
+//        {
+//
+//            //android.os.Process.sendSignal(toKill.get(iCnt), Process.SIGNAL_KILL);
+//            // android.os.Process.killProcess(toKill.get(iCnt));
+//            ActivityManager manager = (ActivityManager) getApplicationContext().getSystemService(Activity.ACTIVITY_SERVICE);
+//            manager.killBackgroundProcesses(AppName.get(iCnt));
+//
+//        }
+//
+//    }
+//    protected ArrayList<Integer> comparator()
+//    {
+//        ActivityManager manager =  (ActivityManager)this.getSystemService(Context.ACTIVITY_SERVICE);
+//        activityes = manager.getRunningAppProcesses();
+//        System.out.println(activityes.size());
+//        System.out.println(PackageName.size());
+//
+//        for( int i = 1; i < activityes.size() - 1 ; i++)
+//            for( int j = 0; j < PackageName.size() - 1; j++)
+//            {
+//
+//                if( PackageName.get(j).packageName.compareTo((activityes.get(i).processName)) == 0)
+//                {
+//                    ToKill.add(activityes.get(i).pid);
+//                    AppName.add(PackageName.get(j).packageName);
+////                    Collections.sort(AppName);
+////                    {
+////                        @Override
+////                        public int compare(String text1, String text2)
+////                        {
+////                            return text1.compareToIgnoreCase(text2);
+////                        }
+////                    };
+//                }
+//            }
+//        return ToKill;
+//    }
 
-        int mypid = myPid();
-        for (int iCnt = 0; iCnt < AppName.size(); iCnt++)
-        {
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
 
-            //android.os.Process.sendSignal(toKill.get(iCnt), Process.SIGNAL_KILL);
-            // android.os.Process.killProcess(toKill.get(iCnt));
-            ActivityManager manager = (ActivityManager) getApplicationContext().getSystemService(Activity.ACTIVITY_SERVICE);
-            manager.killBackgroundProcesses(AppName.get(iCnt));
-
+    }
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if(hasFocus) {
+            list.setAdapter(permissionsAdapter);
+            handletoggleclicks();
         }
-
     }
-    protected ArrayList<Integer> comparator()
-    {
-        ActivityManager manager =  (ActivityManager)this.getSystemService(Context.ACTIVITY_SERVICE);
-        activityes = manager.getRunningAppProcesses();
-        System.out.println(activityes.size());
-        System.out.println(PackageName.size());
-
-        for( int i = 1; i < activityes.size() - 1 ; i++)
-            for( int j = 0; j < PackageName.size() - 1; j++)
-            {
-
-                if( PackageName.get(j).packageName.compareTo((activityes.get(i).processName)) == 0)
-                {
-                    ToKill.add(activityes.get(i).pid);
-                    AppName.add(PackageName.get(j).packageName);
-//                    Collections.sort(AppName);
-//                    {
-//                        @Override
-//                        public int compare(String text1, String text2)
-//                        {
-//                            return text1.compareToIgnoreCase(text2);
-//                        }
-//                    };
-                }
-            }
-        return ToKill;
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        permissionsAdapter = new PermissionAdapter(this, PackageValList); //object of our adapter
+//        permissionsAdapter = new PermissionAdapter(this, PackageValList); //object of our adapter
         list.setAdapter(permissionsAdapter);
+        handletoggleclicks();
 //        Collections.sort(AppName);
     }
 
