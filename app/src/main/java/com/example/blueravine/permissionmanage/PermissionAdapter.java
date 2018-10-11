@@ -104,10 +104,10 @@ public class PermissionAdapter extends ArrayAdapter<PackageVal> implements Filte
         {
             @Override
             public void onClick(View view) {
-                Snackbar snackbar = Snackbar
-                        .make(relativeLayout, "app postion " +appinstall.get(position).packageName.toString(), Snackbar.LENGTH_LONG);
-
-                snackbar.show();
+//                Snackbar snackbar = Snackbar
+//                        .make(relativeLayout, "app postion " +appinstall.get(position).packageName.toString(), Snackbar.LENGTH_LONG);
+//
+//                snackbar.show();
                 Intent in = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                 Uri uri = Uri.parse("package:" + appinstall.get(position).packageName.toString());
                 in.setData(uri);
