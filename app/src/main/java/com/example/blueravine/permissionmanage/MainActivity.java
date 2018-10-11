@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
                 {
 
                     Snackbar snackbar = Snackbar
-                            .make(relativeLayout, "To switch off location go to the following page !", Snackbar.LENGTH_LONG)
+                            .make(relativeLayout, "Please disable locatiion/GPS in the following screen and navigate back ", Snackbar.LENGTH_LONG)
                             .setAction("OK", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -381,28 +381,66 @@ public class MainActivity extends AppCompatActivity {
                 if (simpleSwitchdev3.isChecked()) {
 
 //                        setMobileDataState(true);
-                    Intent intent = new Intent();
-                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
-//                        intent.addCategory(Intent.CATEGORY_DEFAULT);
-                    startActivity(intent);
+//                    Intent intent = new Intent();
+//                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
+////                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+//                    startActivity(intent);
 
                     Snackbar snackbar = Snackbar
-                            .make(relativeLayout, "Network ON", Snackbar.LENGTH_LONG);
+                            .make(relativeLayout, "Please enable 'Cellular Data' or 'Mobile Data' in the following screen and navigate back ", Snackbar.LENGTH_LONG)
+                            .setAction("OK", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
+//                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+                                    startActivity(intent);
+                                    Snackbar snackbar = Snackbar
+                                            .make(relativeLayout, "Mobile Data turned ON", Snackbar.LENGTH_LONG);
 
+                                    snackbar.show();
+                                }
+                            });
+                    // Changing message text color
+                    snackbar.setActionTextColor(Color.RED);
+
+// Changing action button text color
+                    View sbView = snackbar.getView();
+                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                    textView.setTextColor(Color.YELLOW);
                     snackbar.show();
                 }
                 else {
 
 //                        setMobileDataState(false);
-                    Intent intent = new Intent();
-                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
-//                        intent.addCategory(Intent.CATEGORY_DEFAULT);
-                    startActivity(intent);
-
+//                    Intent intent = new Intent();
+//                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
+////                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+//                    startActivity(intent);
                     Snackbar snackbar = Snackbar
-                            .make(relativeLayout, "Network OFF", Snackbar.LENGTH_LONG);
+                            .make(relativeLayout, "Please disable 'Cellular Data' or 'Mobile Data' in the following screen and navigate back ", Snackbar.LENGTH_LONG)
+                            .setAction("OK", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
+//                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+                                    startActivity(intent);
+                                    Snackbar snackbar = Snackbar
+                                            .make(relativeLayout, "Mobile Data turned OFF", Snackbar.LENGTH_LONG);
 
+                                    snackbar.show();
+                                }
+                            });
+                    // Changing message text color
+                    snackbar.setActionTextColor(Color.RED);
+
+// Changing action button text color
+                    View sbView = snackbar.getView();
+                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+                    textView.setTextColor(Color.YELLOW);
                     snackbar.show();
+
                 }
 
 
