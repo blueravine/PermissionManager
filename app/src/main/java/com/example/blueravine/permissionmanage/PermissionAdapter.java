@@ -258,41 +258,41 @@ public class PermissionAdapter extends ArrayAdapter<PackageVal> implements Filte
     if((packageManager.checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION, appinstall.get(position).packageName)==PackageManager.PERMISSION_GRANTED)
             ||(packageManager.checkPermission(Manifest.permission.ACCESS_FINE_LOCATION, appinstall.get(position).packageName)==PackageManager.PERMISSION_GRANTED)){
 //
-        simpleSwitch.setText("ON");
+        simpleSwitch.setText("Granted");
         simpleSwitch.setTextColor(Color.parseColor("#2e8d3d"));
         appinstall.get(position).setLocationpermis(true);
 
 
     }else
     {
-        simpleSwitch.setText("OFF");
+        simpleSwitch.setText("Denied");
         simpleSwitch.setTextColor(Color.parseColor("#a3a3a3"));
         appinstall.get(position).setLocationpermis(false);
     }
 
     if ((packageManager.checkPermission(Manifest.permission.CAMERA, appinstall.get(position).packageName)==PackageManager.PERMISSION_GRANTED)){
 
-        simpleSwitch1.setText("ON");
+        simpleSwitch1.setText("Granted");
         simpleSwitch1.setTextColor(Color.parseColor("#2e8d3d"));
         appinstall.get(position).setCamerapermis(true);
 
     }else
     {
-        simpleSwitch1.setText("OFF");
+        simpleSwitch1.setText("Denied");
         simpleSwitch1.setTextColor(Color.parseColor("#a3a3a3"));
         appinstall.get(position).setCamerapermis(false);
     }
 
     if ((packageManager.checkPermission(Manifest.permission.RECORD_AUDIO, appinstall.get(position).packageName)==PackageManager.PERMISSION_GRANTED)){
 
-        simpleSwitch2.setText("ON");
+        simpleSwitch2.setText("Granted");
         simpleSwitch2.setTextColor(Color.parseColor("#2e8d3d"));
         appinstall.get(position).setMicpermis(true);
 
     }
     else
     {
-        simpleSwitch2.setText("OFF");
+        simpleSwitch2.setText("Denied");
         simpleSwitch2.setTextColor(Color.parseColor("#a3a3a3"));
         appinstall.get(position).setMicpermis(false);
     }
@@ -301,13 +301,13 @@ public class PermissionAdapter extends ArrayAdapter<PackageVal> implements Filte
             ||(packageManager.checkPermission(Manifest.permission.WRITE_CONTACTS, appinstall.get(position).packageName)==PackageManager.PERMISSION_GRANTED)
             ||(packageManager.checkPermission(Manifest.permission.GET_ACCOUNTS, appinstall.get(position).packageName)==PackageManager.PERMISSION_GRANTED)){
 
-        simpleSwitch3.setText("ON");
+        simpleSwitch3.setText("Granted");
         simpleSwitch3.setTextColor(Color.parseColor("#2e8d3d"));
         appinstall.get(position).setContactspermis(true);
     }
     else
     {
-        simpleSwitch3.setText("OFF");
+        simpleSwitch3.setText("Denied");
         simpleSwitch3.setTextColor(Color.parseColor("#a3a3a3"));
         appinstall.get(position).setContactspermis(false);
 

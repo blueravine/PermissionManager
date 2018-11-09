@@ -143,11 +143,11 @@ public class MainActivity extends AppCompatActivity {
         dang = getResources().getStringArray(R.array.dangarray); //String board with permissive permissions based on: https://developer.android.com/guide/topics/permissions/requesting.html#normal-dangerous
         list = (ListView) findViewById(R.id.listView1); //we set our application list
 //        cardview = (CardView) findViewById(R.id.card_view);
-        simpleSwitchdev = (Switch) findViewById(R.id.SwitchLocdev);
-        simpleSwitchdev1 = (Switch) findViewById(R.id.SwitchCamdev);
-        simpleSwitchdev2 = (Switch) findViewById(R.id.SwitchMicdev);
-        simpleSwitchdev3 = (Switch) findViewById(R.id.SwitchCalldev);
-        relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+//        simpleSwitchdev = (Switch) findViewById(R.id.SwitchLocdev);
+//        simpleSwitchdev1 = (Switch) findViewById(R.id.SwitchCamdev);
+//        simpleSwitchdev2 = (Switch) findViewById(R.id.SwitchMicdev);
+//        simpleSwitchdev3 = (Switch) findViewById(R.id.SwitchCalldev);
+//        relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
 
 
 
@@ -191,263 +191,263 @@ public class MainActivity extends AppCompatActivity {
 
 //        mState = 0;
 //        invalidateOptionsMenu();
-        handletoggleclicks();
+//        handletoggleclicks();
 
 
 
 
     }
 
-    public void handletoggleclicks(){
-
-        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        final LocationManager loc = (LocationManager) MainActivity.this.getSystemService( Context.LOCATION_SERVICE );
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                if(manager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-                    simpleSwitchdev.setChecked(true);
-
-
-                }
-                else{
-                    simpleSwitchdev.setChecked(false);
-                }
-            }
-        }, 200);
-
-        // Capture ToggleButton clicks
-        @SuppressLint("WifiManagerLeak")
-        final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        Handler handlerwifi = new Handler();
-        handlerwifi.postDelayed(new Runnable() {
-            public void run() {
-        if(wifiManager.isWifiEnabled()){
-            simpleSwitchdev1.setChecked(true);
-        }
-        else
-        {
-            simpleSwitchdev1.setChecked(false);
-        }
-            }
-        }, 200);
-        Handler handlerbluetooth = new Handler();
-        handlerbluetooth.postDelayed(new Runnable() {
-            public void run() {
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-        if(mBluetoothAdapter.isEnabled()){
-            simpleSwitchdev2.setChecked(true);
-        }
-        else
-        {
-            simpleSwitchdev2.setChecked(false);
-        }
-    }
-}, 200);
-        mobileDataEnabled = getMobileDataState();
-        Handler handlerdata = new Handler();
-        handlerdata.postDelayed(new Runnable() {
-            public void run() {
-        if (mobileDataEnabled)
-        {
-//                setMobileDataEnabledMethod.invoke(telephonyService, mobileDataEnabled);
-            simpleSwitchdev3.setChecked(true);
-        }
-        else {
-            simpleSwitchdev3.setChecked(false);
-        }
-        }
-        }, 200);
-        simpleSwitchdev.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                if (simpleSwitchdev.isChecked()) {
-                    if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && hasGPSDevice(MainActivity.this)) {
-
-                        Snackbar snackbar = Snackbar
-                                .make(relativeLayout, "Gps enabled", Snackbar.LENGTH_LONG);
-
-                        snackbar.show();
-//                        Toast.makeText(MainActivity.this,"Gps not enabled",Toast.LENGTH_SHORT).show();
-                        enableLoc();
-                    }else{
-                        Snackbar snackbar = Snackbar
-                                .make(relativeLayout, "Gps already enabled", Snackbar.LENGTH_LONG);
-
-                        snackbar.show();
-//                        Toast.makeText(MainActivity.this,"Gps already enabled",Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-                else if( loc.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER ) )
-                {
-
-                    Snackbar snackbar = Snackbar
-                            .make(relativeLayout, "Please disable locatiion/GPS in the following screen and navigate back ", Snackbar.LENGTH_LONG)
-                            .setAction("OK", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS );
-                                    startActivity(myIntent);
-                                    Snackbar snackbar = Snackbar
-                                            .make(relativeLayout, "GPS off", Snackbar.LENGTH_LONG);
-
-                                    snackbar.show();
-                                }
-                            });
-                    // Changing message text color
-                    snackbar.setActionTextColor(Color.RED);
-
-// Changing action button text color
-                    View sbView = snackbar.getView();
-                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-                    textView.setTextColor(Color.YELLOW);
-                    snackbar.show();
-
-                }
-
-            }
-
-        });
-
-        simpleSwitchdev.setChecked(false);
-
-//        WifiManager to control the Wifi Service
-
-        simpleSwitchdev1.setOnClickListener(new View.OnClickListener() {
-            //                @SuppressLint("WifiManagerLeak")
-//                final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-            @Override
-            public void onClick(View view) {
+//    public void handletoggleclicks(){
 //
-                if (simpleSwitchdev1.isChecked()) {
-                    // Switch On Wifi
-                    wifiManager.setWifiEnabled(true);
-                    Snackbar snackbar = Snackbar
-                            .make(relativeLayout, "Wifi Turned ON", Snackbar.LENGTH_LONG);
-
-                    snackbar.show();
-                }
-                else {
-                    // Switch Off Wifi
-                    wifiManager.setWifiEnabled(false);
-                    Snackbar snackbar = Snackbar
-                            .make(relativeLayout, "Wifi Turned OFF", Snackbar.LENGTH_LONG);
-
-                    snackbar.show();
-                }
-            }
-        });
-//        simpleSwitchdev1.setChecked(false);
-
-
-        simpleSwitchdev2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
+//        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        final LocationManager loc = (LocationManager) MainActivity.this.getSystemService( Context.LOCATION_SERVICE );
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            public void run() {
+//                if(manager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+//                    simpleSwitchdev.setChecked(true);
 //
-                if (simpleSwitchdev2.isChecked()) {
-                    // Switch On bluetooth
-                    BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-                    adapter.enable();
-                    Snackbar snackbar = Snackbar
-                            .make(relativeLayout, "Bluetooth ON", Snackbar.LENGTH_LONG);
-
-                    snackbar.show();
-                }
-                else {
-                    // Switch Off bluetooth
-                    BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-                    adapter.disable();
-                    Snackbar snackbar = Snackbar
-                            .make(relativeLayout, "Bluetooth OFF", Snackbar.LENGTH_LONG);
-
-                    snackbar.show();
-                }
-            }
-        });
-//        simpleSwitchdev2.setChecked(false);
+//
+//                }
+//                else{
+//                    simpleSwitchdev.setChecked(false);
+//                }
+//            }
+//        }, 200);
+//
+//        // Capture ToggleButton clicks
+//        @SuppressLint("WifiManagerLeak")
+//        final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+//        Handler handlerwifi = new Handler();
+//        handlerwifi.postDelayed(new Runnable() {
+//            public void run() {
+//        if(wifiManager.isWifiEnabled()){
+//            simpleSwitchdev1.setChecked(true);
 //        }
-
-        simpleSwitchdev3.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("NewApi")
-            @Override
-            public void onClick(View view) {
-//                if(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.MODIFY_PHONE_STATE)==PackageManager.PERMISSION_GRANTED){
-                if (simpleSwitchdev3.isChecked()) {
-
-//                        setMobileDataState(true);
-//                    Intent intent = new Intent();
-//                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
+//        else
+//        {
+//            simpleSwitchdev1.setChecked(false);
+//        }
+//            }
+//        }, 200);
+//        Handler handlerbluetooth = new Handler();
+//        handlerbluetooth.postDelayed(new Runnable() {
+//            public void run() {
+//        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//
+//        if(mBluetoothAdapter.isEnabled()){
+//            simpleSwitchdev2.setChecked(true);
+//        }
+//        else
+//        {
+//            simpleSwitchdev2.setChecked(false);
+//        }
+//    }
+//}, 200);
+//        mobileDataEnabled = getMobileDataState();
+//        Handler handlerdata = new Handler();
+//        handlerdata.postDelayed(new Runnable() {
+//            public void run() {
+//        if (mobileDataEnabled)
+//        {
+////                setMobileDataEnabledMethod.invoke(telephonyService, mobileDataEnabled);
+//            simpleSwitchdev3.setChecked(true);
+//        }
+//        else {
+//            simpleSwitchdev3.setChecked(false);
+//        }
+//        }
+//        }, 200);
+//        simpleSwitchdev.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//
+//                if (simpleSwitchdev.isChecked()) {
+//                    if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && hasGPSDevice(MainActivity.this)) {
+//
+//                        Snackbar snackbar = Snackbar
+//                                .make(relativeLayout, "Gps enabled", Snackbar.LENGTH_LONG);
+//
+//                        snackbar.show();
+////                        Toast.makeText(MainActivity.this,"Gps not enabled",Toast.LENGTH_SHORT).show();
+//                        enableLoc();
+//                    }else{
+//                        Snackbar snackbar = Snackbar
+//                                .make(relativeLayout, "Gps already enabled", Snackbar.LENGTH_LONG);
+//
+//                        snackbar.show();
+////                        Toast.makeText(MainActivity.this,"Gps already enabled",Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                }
+//                else if( loc.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER ) )
+//                {
+//
+//                    Snackbar snackbar = Snackbar
+//                            .make(relativeLayout, "Please disable locatiion/GPS in the following screen and navigate back ", Snackbar.LENGTH_LONG)
+//                            .setAction("OK", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS );
+//                                    startActivity(myIntent);
+//                                    Snackbar snackbar = Snackbar
+//                                            .make(relativeLayout, "GPS off", Snackbar.LENGTH_LONG);
+//
+//                                    snackbar.show();
+//                                }
+//                            });
+//                    // Changing message text color
+//                    snackbar.setActionTextColor(Color.RED);
+//
+//// Changing action button text color
+//                    View sbView = snackbar.getView();
+//                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+//                    textView.setTextColor(Color.YELLOW);
+//                    snackbar.show();
+//
+//                }
+//
+//            }
+//
+//        });
+//
+//        simpleSwitchdev.setChecked(false);
+//
+////        WifiManager to control the Wifi Service
+//
+//        simpleSwitchdev1.setOnClickListener(new View.OnClickListener() {
+//            //                @SuppressLint("WifiManagerLeak")
+////                final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+//            @Override
+//            public void onClick(View view) {
+////
+//                if (simpleSwitchdev1.isChecked()) {
+//                    // Switch On Wifi
+//                    wifiManager.setWifiEnabled(true);
+//                    Snackbar snackbar = Snackbar
+//                            .make(relativeLayout, "Wifi Turned ON", Snackbar.LENGTH_LONG);
+//
+//                    snackbar.show();
+//                }
+//                else {
+//                    // Switch Off Wifi
+//                    wifiManager.setWifiEnabled(false);
+//                    Snackbar snackbar = Snackbar
+//                            .make(relativeLayout, "Wifi Turned OFF", Snackbar.LENGTH_LONG);
+//
+//                    snackbar.show();
+//                }
+//            }
+//        });
+////        simpleSwitchdev1.setChecked(false);
+//
+//
+//        simpleSwitchdev2.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+////
+//                if (simpleSwitchdev2.isChecked()) {
+//                    // Switch On bluetooth
+//                    BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+//                    adapter.enable();
+//                    Snackbar snackbar = Snackbar
+//                            .make(relativeLayout, "Bluetooth ON", Snackbar.LENGTH_LONG);
+//
+//                    snackbar.show();
+//                }
+//                else {
+//                    // Switch Off bluetooth
+//                    BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+//                    adapter.disable();
+//                    Snackbar snackbar = Snackbar
+//                            .make(relativeLayout, "Bluetooth OFF", Snackbar.LENGTH_LONG);
+//
+//                    snackbar.show();
+//                }
+//            }
+//        });
+////        simpleSwitchdev2.setChecked(false);
+////        }
+//
+//        simpleSwitchdev3.setOnClickListener(new View.OnClickListener() {
+//            @SuppressLint("NewApi")
+//            @Override
+//            public void onClick(View view) {
+////                if(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.MODIFY_PHONE_STATE)==PackageManager.PERMISSION_GRANTED){
+//                if (simpleSwitchdev3.isChecked()) {
+//
+////                        setMobileDataState(true);
+////                    Intent intent = new Intent();
+////                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
+//////                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+////                    startActivity(intent);
+//
+//                    Snackbar snackbar = Snackbar
+//                            .make(relativeLayout, "Please enable 'Cellular Data' or 'Mobile Data' in the following screen and navigate back ", Snackbar.LENGTH_LONG)
+//                            .setAction("OK", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    Intent intent = new Intent();
+//                                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
 ////                        intent.addCategory(Intent.CATEGORY_DEFAULT);
-//                    startActivity(intent);
-
-                    Snackbar snackbar = Snackbar
-                            .make(relativeLayout, "Please enable 'Cellular Data' or 'Mobile Data' in the following screen and navigate back ", Snackbar.LENGTH_LONG)
-                            .setAction("OK", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Intent intent = new Intent();
-                                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
-//                        intent.addCategory(Intent.CATEGORY_DEFAULT);
-                                    startActivity(intent);
-                                    Snackbar snackbar = Snackbar
-                                            .make(relativeLayout, "Mobile Data turned ON", Snackbar.LENGTH_LONG);
-
-                                    snackbar.show();
-                                }
-                            });
-                    // Changing message text color
-                    snackbar.setActionTextColor(Color.RED);
-
-// Changing action button text color
-                    View sbView = snackbar.getView();
-                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-                    textView.setTextColor(Color.YELLOW);
-                    snackbar.show();
-                }
-                else {
-
-//                        setMobileDataState(false);
-//                    Intent intent = new Intent();
-//                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
+//                                    startActivity(intent);
+//                                    Snackbar snackbar = Snackbar
+//                                            .make(relativeLayout, "Mobile Data turned ON", Snackbar.LENGTH_LONG);
+//
+//                                    snackbar.show();
+//                                }
+//                            });
+//                    // Changing message text color
+//                    snackbar.setActionTextColor(Color.RED);
+//
+//// Changing action button text color
+//                    View sbView = snackbar.getView();
+//                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+//                    textView.setTextColor(Color.YELLOW);
+//                    snackbar.show();
+//                }
+//                else {
+//
+////                        setMobileDataState(false);
+////                    Intent intent = new Intent();
+////                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
+//////                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+////                    startActivity(intent);
+//                    Snackbar snackbar = Snackbar
+//                            .make(relativeLayout, "Please disable 'Cellular Data' or 'Mobile Data' in the following screen and navigate back ", Snackbar.LENGTH_LONG)
+//                            .setAction("OK", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    Intent intent = new Intent();
+//                                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
 ////                        intent.addCategory(Intent.CATEGORY_DEFAULT);
-//                    startActivity(intent);
-                    Snackbar snackbar = Snackbar
-                            .make(relativeLayout, "Please disable 'Cellular Data' or 'Mobile Data' in the following screen and navigate back ", Snackbar.LENGTH_LONG)
-                            .setAction("OK", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Intent intent = new Intent();
-                                    intent.setComponent(new ComponentName("com.android.settings","com.android.settings.Settings$DataUsageSummaryActivity"));
-//                        intent.addCategory(Intent.CATEGORY_DEFAULT);
-                                    startActivity(intent);
-                                    Snackbar snackbar = Snackbar
-                                            .make(relativeLayout, "Mobile Data turned OFF", Snackbar.LENGTH_LONG);
-
-                                    snackbar.show();
-                                }
-                            });
-                    // Changing message text color
-                    snackbar.setActionTextColor(Color.RED);
-
-// Changing action button text color
-                    View sbView = snackbar.getView();
-                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-                    textView.setTextColor(Color.YELLOW);
-                    snackbar.show();
-
-                }
-
-
-
-            }
-        });
-    }
+//                                    startActivity(intent);
+//                                    Snackbar snackbar = Snackbar
+//                                            .make(relativeLayout, "Mobile Data turned OFF", Snackbar.LENGTH_LONG);
+//
+//                                    snackbar.show();
+//                                }
+//                            });
+//                    // Changing message text color
+//                    snackbar.setActionTextColor(Color.RED);
+//
+//// Changing action button text color
+//                    View sbView = snackbar.getView();
+//                    TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+//                    textView.setTextColor(Color.YELLOW);
+//                    snackbar.show();
+//
+//                }
+//
+//
+//
+//            }
+//        });
+//    }
     private boolean hasGPSDevice(Context context) {
         final LocationManager mgr = (LocationManager) context
                 .getSystemService(Context.LOCATION_SERVICE);
@@ -859,7 +859,7 @@ A method that checks whether an application is a system application. We reject s
         super.onWindowFocusChanged(hasFocus);
         if(hasFocus) {
             list.setAdapter(permissionsAdapter);
-            handletoggleclicks();
+//            handletoggleclicks();
         }
     }
     @Override
@@ -867,7 +867,7 @@ A method that checks whether an application is a system application. We reject s
         super.onResume();
 //        permissionsAdapter = new PermissionAdapter(this, PackageValList); //object of our adapter
         list.setAdapter(permissionsAdapter);
-        handletoggleclicks();
+//        handletoggleclicks();
 //        Collections.sort(AppName);
     }
 
