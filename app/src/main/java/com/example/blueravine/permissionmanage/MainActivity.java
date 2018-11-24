@@ -3,6 +3,7 @@ package com.example.blueravine.permissionmanage;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
@@ -94,6 +95,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import io.fabric.sdk.android.Fabric;
+import com.crashlytics.android.Crashlytics;
+
 
 import static android.app.ActivityManager.MOVE_TASK_WITH_HOME;
 import static android.os.Process.myPid;
@@ -130,6 +134,10 @@ public class MainActivity extends AppCompatActivity {
     private final int REQUEST_ENABLE_BT = 1;
     private static final int  MY_PREMISSIONS_REQUEST_MODIFY_PHONE_STATE = 0;
     SearchView searchView;
+    EditText editText ;
+    Button ButtonOK;
+    Button ButtonCancel;
+    Dialog dialog;
     public int mState = 0; //at the top of the code
     int count;
 //where you want to trigger the hide action
@@ -138,8 +146,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
+
         setContentView(R.layout.activity_main);
 
+        // set the custom dialog components - text, image and button
+         editText = (EditText) findViewById(R.id.editText);
+         ButtonOK = (Button) findViewById(R.id.ButtonOK);
+        ButtonCancel = (Button) findViewById(R.id.ButtonCancel);
+//        ButtonOK.setText("Android custom dialog example!");
         dang = getResources().getStringArray(R.array.dangarray); //String board with permissive permissions based on: https://developer.android.com/guide/topics/permissions/requesting.html#normal-dangerous
         list = (ListView) findViewById(R.id.listView1); //we set our application list
 //        cardview = (CardView) findViewById(R.id.card_view);
@@ -549,6 +564,7 @@ public class MainActivity extends AppCompatActivity {
 
         searchView.setQueryHint(getString(R.string.search_hint));
 
+        MenuItem feedbackitem = menu.findItem(R.id.feedback);
 //        MenuItem itemSearch = menu.findItem(R.id.search);
         final MenuItem itemSetting = menu.findItem(R.id.filter);
 //        if (count % 2 == 0)
@@ -587,6 +603,38 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
+        });
+
+        feedbackitem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                // custom dialog
+                 dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(R.layout.custom);
+                dialog.setTitle("FeedBack Form...");
+                dialog.show();
+
+//                ButtonCancel.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+//                // if button is clicked, close the custom dialog
+//                dialogButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                dialog.show();
+//            }
+//        });
+                return false;
+            }
         });
 //        if (mState == 1) {//1 is true, 0 is false
 //            invalidateOptionsMenu();
