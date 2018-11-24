@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">PermissionManager</string>
     <string name="menu_search">Search Place</string>
+    <string name="menu_feedback">Feedback</string>
     <string name="appname_search">Search Apps</string>
     <string name="search_hint">Apps</string>
     <string-array name="array">
