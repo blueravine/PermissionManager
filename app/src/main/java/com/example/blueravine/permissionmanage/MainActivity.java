@@ -78,6 +78,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -95,6 +99,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 import io.fabric.sdk.android.Fabric;
 import com.crashlytics.android.Crashlytics;
 
@@ -127,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     Method dataMtd;
     final static int REQUEST_LOCATION = 199;
     TextView mEmptyView;
-    Context context;
+//    Context context;
     String TAG;
     boolean mobileDataEnabled;
     TelephonyManager telephonyService;
@@ -135,11 +142,13 @@ public class MainActivity extends AppCompatActivity {
     private static final int  MY_PREMISSIONS_REQUEST_MODIFY_PHONE_STATE = 0;
     SearchView searchView;
     EditText editText ;
-    Button ButtonOK;
-    Button ButtonCancel;
-    Dialog dialog;
+//    public Button ButtonOK,ButtonCancel;
+//    public TextView textTitle;
+    final Context context = this;
+//    Dialog dialog;
     public int mState = 0; //at the top of the code
     int count;
+    JSONObject objs;
 //where you want to trigger the hide action
     // to hide or mState = 0; to show
 
@@ -152,8 +161,9 @@ public class MainActivity extends AppCompatActivity {
 
         // set the custom dialog components - text, image and button
          editText = (EditText) findViewById(R.id.editText);
-         ButtonOK = (Button) findViewById(R.id.ButtonOK);
-        ButtonCancel = (Button) findViewById(R.id.ButtonCancel);
+//         ButtonOK = (Button) findViewById(R.id.ButtonOK);
+//        ButtonCancel = (Button) findViewById(R.id.ButtonCancel);
+//        textTitle = (TextView) findViewById(R.id.textTitle);
 //        ButtonOK.setText("Android custom dialog example!");
         dang = getResources().getStringArray(R.array.dangarray); //String board with permissive permissions based on: https://developer.android.com/guide/topics/permissions/requesting.html#normal-dangerous
         list = (ListView) findViewById(R.id.listView1); //we set our application list
@@ -609,17 +619,100 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 // custom dialog
-                 dialog = new Dialog(MainActivity.this);
+                final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.custom);
-                dialog.setTitle("FeedBack Form...");
-                dialog.show();
+//                dialog.setTitle("We value your feedback");
+//                dialog.show();
+                Button ButtonOK = (Button) dialog.findViewById(R.id.ButtonOK);
+                Button ButtonCancel = (Button) dialog.findViewById(R.id.ButtonCancel);
+                TextView textTitle = (TextView) dialog.findViewById(R.id.textTitle);
 
-//                ButtonCancel.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        dialog.dismiss();
-//                    }
-//                });
+                textTitle.setText("We value your feedback.");
+
+                ButtonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                ButtonOK.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (isOnline()) {     //////////  Checking device is online or offline /////////////////
+
+//                            final ACProgressFlower dialog = new ACProgressFlower.Builder(MainActivity.this)
+//                                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+//                                    .themeColor(Color.WHITE)
+//                                    .text("Loading...")
+//                                    .fadeColor(Color.DKGRAY).build();
+//                            dialog.show();
+
+                            JSONObject jsonObject = new JSONObject();
+                            try {
+                                       /* jsonObject.put("userid", "test@gmail.com");
+                                        jsonObject.put("password", "test");*/
+                                jsonObject.put("feedbacktext", editText.getText().toString());
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            AndroidNetworking.post(Const.FeedBack_url)
+                                    .addJSONObjectBody(jsonObject)
+                                    .setTag(this)
+                                    .setPriority(Priority.MEDIUM)
+                                    .build()
+                                    .getAsJSONObject(new JSONObjectRequestListener() {
+                                        @Override
+                                        public void onResponse(JSONObject response) {
+                                            // do anything with response
+                                            Log.d("Response",response.toString());
+
+                                            if (null != response) {
+
+                                                try {
+                                                    if ("true" == response.optString("status") ) {
+
+//                                                    if (null != response.optString("data") || 0 != response.optString("data").length() ) {
+//
+//                                                        Log.d("Response Data", response.optString("data"));
+
+
+
+                                                        Toast.makeText(getApplicationContext(), response.getString("message").toString(), Toast.LENGTH_SHORT).show();
+
+//                                                        Intent i = new Intent(ChangePasswordActivity.this, MainActivity.class);
+//                                                        startActivity(i);
+//                                                        finish();
+                                                        // }
+                                                    } else {
+
+                                                        Toast.makeText(getApplicationContext(), response.getString("message").toString(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+
+                                            dialog.dismiss();  ////////////////////  Dismiss custom dialog /////////////////////
+                                        }
+
+                                        @Override
+                                        public void onError(ANError anError) {
+
+                                        }
+
+                                    });
+                        } else {
+
+                            //display in short period of time
+                            Toast.makeText(getApplicationContext(), "Please check your network connectivity", Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.dismiss();
+                    }
+                });
 //
 //                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
 //                // if button is clicked, close the custom dialog
@@ -630,7 +723,7 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                });
 //
-//                dialog.show();
+                dialog.show();
 //            }
 //        });
                 return false;
@@ -918,6 +1011,11 @@ A method that checks whether an application is a system application. We reject s
 //        handletoggleclicks();
 //        Collections.sort(AppName);
     }
-
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
 
 }
