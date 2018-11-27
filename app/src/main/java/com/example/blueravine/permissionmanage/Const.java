@@ -13,9 +13,9 @@ import java.util.Map;
 
 public class Const {
 
-    private static String BASE_URL = "http://125.16.17.101:8080";
+    private static String BASE_URL = "https://interface.blueravine.in/smartmedi";
 
-    public static final String FeedBack_url = BASE_URL + "/TaskManagerApp/tasks/getMembershippe";
+    public static final String FeedBack_url = BASE_URL + "/feedback/register";
 //    Context context;
 //
 //    // http://localhost:8080/TaskManagerApp/tasks/useradd

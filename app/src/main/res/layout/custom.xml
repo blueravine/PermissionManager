@@ -29,7 +29,7 @@
         android:layout_marginRight="15dp"
         android:paddingLeft="10dp"
         android:background="@drawable/rectangle_editext"
-        android:textColor="#ffffff"
+        android:textColor="#000"
         android:inputType="textMultiLine" />
 <RelativeLayout
     android:layout_width="match_parent"

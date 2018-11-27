@@ -57,6 +57,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     private final int REQUEST_ENABLE_BT = 1;
     private static final int  MY_PREMISSIONS_REQUEST_MODIFY_PHONE_STATE = 0;
     SearchView searchView;
-    EditText editText ;
+//    EditText editText ;
 //    public Button ButtonOK,ButtonCancel;
 //    public TextView textTitle;
     final Context context = this;
@@ -149,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
     public int mState = 0; //at the top of the code
     int count;
     JSONObject objs;
+    public static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyyMMDDhhmmssSSS");
 //where you want to trigger the hide action
     // to hide or mState = 0; to show
 
@@ -160,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // set the custom dialog components - text, image and button
-         editText = (EditText) findViewById(R.id.editText);
+//         editText = (EditText) findViewById(R.id.editText);
 //         ButtonOK = (Button) findViewById(R.id.ButtonOK);
 //        ButtonCancel = (Button) findViewById(R.id.ButtonCancel);
 //        textTitle = (TextView) findViewById(R.id.textTitle);
@@ -626,7 +628,7 @@ public class MainActivity extends AppCompatActivity {
                 Button ButtonOK = (Button) dialog.findViewById(R.id.ButtonOK);
                 Button ButtonCancel = (Button) dialog.findViewById(R.id.ButtonCancel);
                 TextView textTitle = (TextView) dialog.findViewById(R.id.textTitle);
-
+                final EditText editText = (EditText) dialog.findViewById(R.id.editText);
                 textTitle.setText("We value your feedback.");
 
                 ButtonCancel.setOnClickListener(new View.OnClickListener() {
@@ -641,18 +643,20 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         if (isOnline()) {     //////////  Checking device is online or offline /////////////////
 
-//                            final ACProgressFlower dialog = new ACProgressFlower.Builder(MainActivity.this)
-//                                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-//                                    .themeColor(Color.WHITE)
-//                                    .text("Loading...")
-//                                    .fadeColor(Color.DKGRAY).build();
-//                            dialog.show();
+                            final ACProgressFlower dialog = new ACProgressFlower.Builder(MainActivity.this)
+                                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                                    .themeColor(Color.WHITE)
+                                    .text("Loading...")
+                                    .fadeColor(Color.DKGRAY).build();
+                            dialog.show();
 
                             JSONObject jsonObject = new JSONObject();
                             try {
-                                       /* jsonObject.put("userid", "test@gmail.com");
-                                        jsonObject.put("password", "test");*/
-                                jsonObject.put("feedbacktext", editText.getText().toString());
+//                                jsonObject.put("id","parseInt(DATE_TIME_FORMAT)+Math.floor(Math.random() * 100)");
+                                jsonObject.put("name", "Imran Ali");
+                                jsonObject.put("mobile", "9885638104");
+                                jsonObject.put("countrycode", "91");
+                                jsonObject.put("feedback", editText.getText().toString());
 
 
                             } catch (JSONException e) {
@@ -673,7 +677,7 @@ public class MainActivity extends AppCompatActivity {
                                             if (null != response) {
 
                                                 try {
-                                                    if ("true" == response.optString("status") ) {
+                                                    if ("true" == response.optString("feedback created") ) {
 
 //                                                    if (null != response.optString("data") || 0 != response.optString("data").length() ) {
 //
