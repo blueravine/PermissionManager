@@ -1,4 +1,4 @@
-package com.example.blueravine.permissionmanage;
+package com.blueravine.permissionmanager;
 
 import org.junit.Test;
 

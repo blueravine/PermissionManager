@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.blueravine.permissionmanage">
+    package="com.blueravine.permissionmanager">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -27,7 +27,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.blueravine.permissionmanager.MainActivity">
             <intent-filter>
                 <!--<action android:name="android.intent.action.MAIN" />-->
                 <action android:name="android.intent.action.SEARCH" />
@@ -45,8 +45,8 @@
             android:name="io.fabric.ApiKey"
             android:value="7c229c128da8e1823a52b4a68f29f0330d91e8f0" />
 
-        <activity android:name=".SingleItem"></activity>
-        <activity android:name=".SplashScreen"
+        <activity android:name="com.blueravine.permissionmanager.SingleItem"></activity>
+        <activity android:name="com.blueravine.permissionmanager.SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemes" >
             <intent-filter>

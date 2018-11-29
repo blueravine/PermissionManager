@@ -1,4 +1,4 @@
-package com.example.blueravine.permissionmanage;
+package com.blueravine.permissionmanager;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

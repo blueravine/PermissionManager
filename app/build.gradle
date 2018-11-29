@@ -8,7 +8,7 @@ repositories {
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.blueravine.permissionmanage"
+        applicationId "com.blueravine.permissionmanager"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1

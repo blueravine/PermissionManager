@@ -1,8 +1,10 @@
-package com.example.blueravine.permissionmanage;
+package com.blueravine.permissionmanager;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.blueravine.permissionmanager.R;
 
 /**
  * Created by blue rabbit on 2018-01-28.

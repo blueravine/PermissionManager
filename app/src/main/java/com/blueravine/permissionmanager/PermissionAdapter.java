@@ -1,4 +1,4 @@
-package com.example.blueravine.permissionmanage;
+package com.blueravine.permissionmanager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -8,9 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.Settings;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +18,13 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.blueravine.permissionmanager.R;
 import com.google.android.gms.location.LocationListener;
 
 import java.util.ArrayList;
 
-import static com.example.blueravine.permissionmanage.MainActivity.PackageName;
-import static com.example.blueravine.permissionmanage.MainActivity.PackageValList;
+import static com.blueravine.permissionmanager.MainActivity.PackageValList;
 
 
 /**

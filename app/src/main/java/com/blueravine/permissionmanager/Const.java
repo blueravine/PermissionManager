@@ -1,4 +1,4 @@
-package com.example.blueravine.permissionmanage;
+package com.blueravine.permissionmanager;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
