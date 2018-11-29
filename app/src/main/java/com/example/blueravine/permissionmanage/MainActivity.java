@@ -110,6 +110,7 @@ import com.crashlytics.android.Crashlytics;
 import static android.app.ActivityManager.MOVE_TASK_WITH_HOME;
 import static android.os.Process.myPid;
 import static com.example.blueravine.permissionmanage.PermissionAdapter.appinstall;
+import static java.lang.Integer.parseInt;
 //import static pm.ad.permissionmanager.ExecuteAsRootBase.canRunRootCommands;
 
 
@@ -150,7 +151,9 @@ public class MainActivity extends AppCompatActivity {
     public int mState = 0; //at the top of the code
     int count;
     JSONObject objs;
-    public static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyyMMDDhhmmssSSS");
+    public static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+    Date currentDate = Calendar.getInstance().getTime();
+    String currentDateTimeString = DATE_TIME_FORMAT.format(currentDate);
 //where you want to trigger the hide action
     // to hide or mState = 0; to show
 
@@ -652,11 +655,12 @@ public class MainActivity extends AppCompatActivity {
 
                             JSONObject jsonObject = new JSONObject();
                             try {
-//                                jsonObject.put("id","parseInt(DATE_TIME_FORMAT)+Math.floor(Math.random() * 100)");
-                                jsonObject.put("name", "Imran Ali");
-                                jsonObject.put("mobile", "9885638104");
-                                jsonObject.put("countrycode", "91");
+                                jsonObject.put("id",(currentDateTimeString));
+                                jsonObject.put("appname", "PermissionsManager");
+                                jsonObject.put("appversion", "1.0.0");
+//                                jsonObject.put("countrycode", "91");
                                 jsonObject.put("feedback", editText.getText().toString());
+
 
 
                             } catch (JSONException e) {
@@ -686,7 +690,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                                                         Toast.makeText(getApplicationContext(), response.getString("message").toString(), Toast.LENGTH_SHORT).show();
-
+                                                        Toast.makeText(getApplicationContext(), " " +currentDateTimeString, Toast.LENGTH_SHORT).show();
 //                                                        Intent i = new Intent(ChangePasswordActivity.this, MainActivity.class);
 //                                                        startActivity(i);
 //                                                        finish();
